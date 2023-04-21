@@ -1,0 +1,28 @@
+<%- include("../layout/header") %>
+
+<tr>
+  <td><%= t('email.owners.locked.hello') %>,</td>
+</tr>
+<tr>
+  <td>
+    <%= t('email.owners.locked.paragraph.1a') %>
+    <b> <%= email %> </b>
+    <%= t('email.owners.locked.paragraph.1b') %>
+    <b> <%= identifier %> </b>
+    <%= t('email.owners.locked.paragraph.1c') %>
+  </td>
+</tr>
+<tr>
+  <td><%= t('email.owners.locked.paragraph.2') %></td>
+</tr>
+<tr>
+  <td class="annotations"><%= t('email.common.help.info') %></td>
+</tr>
+<tr>
+  <td class="greetings">
+    <%= t('email.common.greetings.yours') %><br />
+    <%= t('email.common.greetings.team') %>
+  </td>
+</tr>
+
+<%- include("../layout/footer") %>

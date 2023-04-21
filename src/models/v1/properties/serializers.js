@@ -1,0 +1,51 @@
+const { serialize } = require('../../../services/serializers')
+
+exports.PERMITED_COLLECTION_PARAMS = [
+  'id',
+  'workspaceId',
+  'dictPropertyTypeId',
+  'name',
+  'internalCode',
+  'registrationNumber',
+  'isAddressPublic',
+  'isCompleted',
+  'multipleUnitTypes',
+  'checkinTime',
+  'checkoutTime',
+  'languages',
+  'address',
+  'coordinates',
+  'distances',
+  'directions',
+  'description',
+  'mainImage',
+  'createdAt',
+  'updatedAt',
+]
+
+exports.PERMITED_ITEM_PARAMS = [
+  'id',
+  'workspaceId',
+  'dictPropertyTypeId',
+  'name',
+  'internalCode',
+  'registrationNumber',
+  'isAddressPublic',
+  'isCompleted',
+  'multipleUnitTypes',
+  'checkinTime',
+  'checkoutTime',
+  'languages',
+  'address',
+  'coordinates',
+  'distances',
+  'directions',
+  'description',
+  'amenities',
+  'completeness',
+  'mainImage',
+  'createdAt',
+  'updatedAt',
+]
+
+exports.serialize = serialize

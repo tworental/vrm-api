@@ -1,0 +1,47 @@
+<%- include("../layout/header") %>
+
+<tr>
+  <td><%= t('email.users.teamInvitation.hello') %>,</td>
+</tr>
+<tr>
+  <td>
+    <%= t('email.users.teamInvitation.paragraph.1a') %>
+    <b> <%= identifier %> </b>
+    <%= t('email.users.teamInvitation.paragraph.1b') %>
+    <b> <%= email %> </b>
+    <%= t('email.users.teamInvitation.paragraph.1c') %>
+  </td>
+</tr>
+<tr>
+  <td class="buttons">
+    <table>
+      <tr>
+        <td align="center">
+          <a href="<%= confirmationUrl %>" class="button" title="<%= t('email.users.teamInvitation.button') %>">
+            <%= t('email.users.teamInvitation.button') %>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <%= t('email.users.teamInvitation.paragraph.2') %>
+    <b> <%= password %> </b>
+  </td>
+</tr>
+<tr>
+  <td><%= t('email.users.teamInvitation.paragraph.3') %></td>
+</tr>
+<tr>
+  <td class="annotations"><%= t('email.common.help.info') %></td>
+</tr>
+<tr>
+  <td class="greetings">
+    <%= t('email.common.greetings.yours') %><br />
+    <%= t('email.common.greetings.team') %>
+  </td>
+</tr>
+
+<%- include("../layout/footer") %>

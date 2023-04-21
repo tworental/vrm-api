@@ -1,0 +1,167 @@
+---
+paths:
+  /v1/app/guests:
+    get:
+      summary: Get list of Guests
+      description: Get list of Guests
+      tags:
+        - app
+        - guests
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        200:
+          description: Ok
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/Access-Control-Allow-Origin'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/Access-Control-Allow-Headers'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/Access-Control-Allow-Methods'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestCollectionResponse'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      summary: Create a new guest
+      description: Create a new Guest
+      tags:
+        - app
+        - guests
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      requestBody:
+        description: Payload for Guest creation
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GuestCreateRequest'
+      responses:
+        201:
+          $ref: '#/components/responses/Created'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+
+  /v1/app/guests/{id}:
+    get:
+      summary: Get Guest details by id
+      description: Get Guest details by id
+      tags:
+        - app
+        - guests
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        200:
+          description: Ok
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/Access-Control-Allow-Origin'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/Access-Control-Allow-Headers'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/Access-Control-Allow-Methods'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestItemResponse'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      summary: Update Guest by id
+      description: Update Guest by id
+      tags:
+        - app
+        - guests
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      requestBody:
+        description: Payload for Guest update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GuestUpdateRequest'
+      responses:
+        204:
+          $ref: '#/components/responses/NoContent'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      summary: Delete Guest by id
+      description: Delete Guest by id
+      tags:
+        - app
+        - guests
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        204:
+          $ref: '#/components/responses/NoContent'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'

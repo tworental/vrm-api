@@ -1,0 +1,28 @@
+const { TABLE_NAME } = require('../../src/models/v1/accounts/constants')
+
+exports.up = (knex) => knex.schema.createTable(TABLE_NAME, (table) => {
+  table.increments().unsigned().primary()
+  table.integer('package_id').unsigned().notNull()
+  table.string('stripe_id', 100)
+  table.string('channex_id', 120).index()
+  table.string('identifier').notNull().index()
+  table.string('domain').index()
+  table.timestamp('trial_expiration_on')
+  table.string('company_name')
+  table.string('company_address')
+  table.string('company_zip', 20)
+  table.string('company_city', 100)
+  table.string('company_country', 2)
+  table.string('company_vat_id', 60)
+  table.string('company_logo')
+  table.timestamp('created_at').notNull().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+  table.timestamp('updated_at').notNull().defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+  table.timestamp('deleted_at')
+
+  table.foreign('package_id')
+    .references('packages.id')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+})
+
+exports.down = (knex) => knex.schema.dropTable(TABLE_NAME)

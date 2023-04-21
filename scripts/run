@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+ENV_FILE=./.env
+
+if [ ! -f "$ENV_FILE" ]; then
+  cp $ENV_FILE.dist $ENV_FILE
+fi
+
+sed -i 's/DATABASE_HOST=db/DATABASE_HOST=localhost/' $ENV_FILE
+
+npm install
+
+if [[ $(docker inspect --format . tworentals-api_db_1) != "." ]]; then
+  docker-compose up -d db
+fi
+
+npm run knex -- migrate:latest
+npm run knex -- seed:run
+
+npm run dev

@@ -1,0 +1,234 @@
+---
+paths:
+  /v1/app/users:
+    get:
+      summary: Get list of Users
+      description: Get list of Users
+      tags:
+        - app
+        - users
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        200:
+          description: Ok
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/Access-Control-Allow-Origin'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/Access-Control-Allow-Headers'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/Access-Control-Allow-Methods'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollectionResponse'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      summary: Create a new User
+      description: Create a new User
+      tags:
+        - app
+        - users
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      requestBody:
+        description: Payload for User creation
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateRequest'
+      responses:
+        201:
+          $ref: '#/components/responses/Created'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+
+  /v1/app/users/{id}:
+    get:
+      summary: Get User details by id
+      description: Get User details by id
+      tags:
+        - app
+        - users
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        200:
+          description: Ok
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/Access-Control-Allow-Origin'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/Access-Control-Allow-Headers'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/Access-Control-Allow-Methods'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserItemResponse'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      summary: Update User by id
+      description: Update User by id
+      tags:
+        - app
+        - users
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      requestBody:
+        description: Payload for User update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateRequest'
+      responses:
+        200:
+          description: Ok
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      summary: Delete User by id
+      description: Delete User by id
+      tags:
+        - app
+        - users
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        204:
+          $ref: '#/components/responses/NoContent'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+
+  /v1/app/users/{id}/invite:
+    post:
+      summary: Invite User by id
+      description: Invite User by id
+      tags:
+        - app
+        - users
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        202:
+          $ref: '#/components/responses/Accepted'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+
+  /v1/app/users/{id}/lock:
+    post:
+      summary: Lock User by id
+      description: Lock User by id
+      tags:
+        - app
+        - users
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        200:
+          description: Ok
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+
+  /v1/app/users/{id}/unlock:
+    post:
+      summary: Unlock User by id
+      description: Unlock User by id
+      tags:
+        - app
+        - users
+      security:
+        - JwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/HeaderContentLanguage'
+        - $ref: '#/components/parameters/HeaderXOrgId'
+      responses:
+        200:
+          description: Ok
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        402:
+          $ref: '#/components/responses/PaymentRequired'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'

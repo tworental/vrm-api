@@ -1,0 +1,254 @@
+{
+  "_meta": {
+    "template_version": 0
+  },
+  "fixtures": [
+    {
+      "name": "product_basic",
+      "path": "/v1/products",
+      "method": "post",
+      "params": {
+        "name": "TwoRentals: Basic Service",
+        "active": true,
+        "description": "The Basic service with extra features",
+        "images": [],
+        "metadata": {
+          "packageId": 1,
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "product_professional",
+      "path": "/v1/products",
+      "method": "post",
+      "params": {
+        "name": "TwoRentals: Professional Service",
+        "active": true,
+        "description": "The Professional service with extra features",
+        "images": [],
+        "metadata": {
+          "packageId": 2,
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "product_enterprise",
+      "path": "/v1/products",
+      "method": "post",
+      "params": {
+        "name": "TwoRentals: Enterprise Service",
+        "active": true,
+        "description": "The Enterprise service with extra features",
+        "images": [],
+        "metadata": {
+          "packageId": 3,
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "product_addons_whitelabel",
+      "path": "/v1/products",
+      "method": "post",
+      "params": {
+        "name": "TwoRentals: WhiteLabel Add-On",
+        "active": true,
+        "description": "A WhiteLabel Add-On for the TwoRentals account",
+        "images": [],
+        "metadata": {
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "price_basic_monthly",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${product_basic:id}",
+        "active": true,
+        "currency": "${.env:DEFAULT_CURRENCY|EUR}",
+        "billing_scheme": "tiered",
+        "tiers_mode": "volume",
+        "recurring": {
+          "interval": "month"
+        },
+        "tiers": [
+          {
+            "up_to": "10",
+            "unit_amount": 1200
+          },
+          {
+            "up_to": "100",
+            "unit_amount": 800
+          },
+          {
+            "up_to": "inf",
+            "unit_amount": 600
+          }
+        ],
+        "metadata": {
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "price_basic_yearly",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${product_basic:id}",
+        "active": true,
+        "currency": "${.env:DEFAULT_CURRENCY|EUR}",
+        "billing_scheme": "tiered",
+        "tiers_mode": "volume",
+        "recurring": {
+          "interval": "year"
+        },
+        "tiers": [
+          {
+            "up_to": "10",
+            "unit_amount": 1000
+          },
+          {
+            "up_to": "100",
+            "unit_amount": 600
+          },
+          {
+            "up_to": "inf",
+            "unit_amount": 500
+          }
+        ],
+        "metadata": {
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "price_professional_monthly",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${product_professional:id}",
+        "active": true,
+        "currency": "${.env:DEFAULT_CURRENCY|EUR}",
+        "billing_scheme": "tiered",
+        "tiers_mode": "volume",
+        "recurring": {
+          "interval": "month"
+        },
+        "tiers": [
+          {
+            "up_to": "inf",
+            "unit_amount": 1000
+          }
+        ],
+        "metadata": {
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "price_professional_yearly",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${product_professional:id}",
+        "active": true,
+        "currency": "${.env:DEFAULT_CURRENCY|EUR}",
+        "billing_scheme": "tiered",
+        "tiers_mode": "volume",
+        "recurring": {
+          "interval": "year"
+        },
+        "tiers": [
+          {
+            "up_to": "inf",
+            "unit_amount": 800
+          }
+        ],
+        "metadata": {
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "price_enterprise_monthly",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${product_enterprise:id}",
+        "active": true,
+        "currency": "${.env:DEFAULT_CURRENCY|EUR}",
+        "billing_scheme": "tiered",
+        "tiers_mode": "volume",
+        "recurring": {
+          "interval": "month"
+        },
+        "tiers": [
+          {
+            "up_to": "inf",
+            "unit_amount": 10000
+          }
+        ],
+        "metadata": {
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "price_enterprise_yearly",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${product_enterprise:id}",
+        "active": true,
+        "currency": "${.env:DEFAULT_CURRENCY|EUR}",
+        "billing_scheme": "tiered",
+        "tiers_mode": "volume",
+        "recurring": {
+          "interval": "year"
+        },
+        "tiers": [
+          {
+            "up_to": "inf",
+            "unit_amount": 8000
+          }
+        ],
+        "metadata": {
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    },
+    {
+      "name": "price_addons_whitelabel",
+      "path": "/v1/prices",
+      "method": "post",
+      "params": {
+        "product": "${product_addons_whitelabel:id}",
+        "active": true,
+        "currency": "${.env:DEFAULT_CURRENCY|EUR}",
+        "unit_amount": 5000,
+        "recurring": {
+          "interval": "month"
+        },
+        "metadata": {
+          "version": "${.env:VERSION|v1}",
+          "label": "${.env:PRIVATE_LABEL_ID|tworentals}"
+        }
+      }
+    }
+  ]
+}

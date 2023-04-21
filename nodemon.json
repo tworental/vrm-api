@@ -1,0 +1,13 @@
+{
+  "verbose": true,
+  "legacyWatch": true,
+  "ignore": [
+    "*.spec.js",
+    "*.ispec.js",
+    "src/**/__fixtures__/",
+    "src/**/__mocks__/",
+    "node_modules"
+  ],
+  "watch": ["src/"],
+  "ext": "js,json"
+}

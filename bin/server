@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const config = require('config')
+const http = require('http')
+
+const app = require('../src/app')
+const cache = require('../src/services/cacheManager')
+const { logError, logInfo } = require('../src/services/logger')
+
+require('../src/scheduler')
+require('../src/listeners')
+
+/**
+ * Get port from environment and store in Express.
+ */
+const port = Number(config.get('server.port') || '3000')
+
+/**
+ * Create HTTP server.
+ */
+const server = http.createServer(app())
+
+server.keepAliveTimeout = config.get('server.keepAliveTimeout')
+server.headersTimeout = config.get('server.headersTimeout')
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port)
+
+/**
+ * On server start we flush all cached data
+ */
+cache.flushAll()
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+server.on('error', (error) => {
+  if (error.syscall !== 'listen') {
+    throw error
+  }
+
+  const bind = typeof port === 'string'
+    ? `Pipe ${port}`
+    : `Port ${port}`
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      logError('http-server-error-occured', {
+        errorMessage: `${bind} requires elevated privileges`,
+        ...error,
+      })
+      process.exit(1)
+      break
+
+    case 'EADDRINUSE':
+      logError('http-server-error-occured', {
+        errorMessage: `${bind} is already in use`,
+        ...error,
+      })
+      process.exit(1)
+      break
+
+    default:
+      throw error
+  }
+})
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+server.on('listening', () => {
+  const addr = server.address()
+  const bind = typeof addr === 'string'
+    ? `pipe ${addr}`
+    : `port ${addr.port}`
+
+  logInfo('http-server-started', { status: `Listening on ${bind}` })
+})

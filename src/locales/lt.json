@@ -1,0 +1,14 @@
+{
+  "invoices.invoiceTitle": "Sąskaita faktūra",
+  "invoices.invoiceTitleProForma": "Invoice Pro-Forma",
+  "invoices.invoiceTitleCorrection": "Corrective Invoice",
+  "invoices.bookingInvoiceTitle": "Užsakymas",
+  "invoices.invoiceNumber": "Saskaitos numeris:",
+  "invoices.invoiceDate": "Data:",
+  "invoices.products": "Produktas",
+  "invoices.quantity": "Kiekis",
+  "invoices.price": "Kaina",
+  "invoices.discount": "Nuolaida",
+  "invoices.subtotal": "Suma",
+  "invoices.total": "Viso"
+}

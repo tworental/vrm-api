@@ -1,0 +1,46 @@
+<%- include("../layout/header") %>
+
+<tr>
+  <td>
+    <%= t('email.users.signup.hello') %>
+    <b> <%= firstName %> </b>,
+  </td>
+</tr>
+<tr>
+  <td>
+    <%= t('email.users.signup.paragraph.1a') %>
+    <b> <%= email %> </b>
+    <%= t('email.users.signup.paragraph.1b') %>
+    <b> <%= domain %> </b>
+  </td>
+</tr>
+<tr>
+  <td class="buttons">
+    <table>
+      <tr>
+        <td align="center">
+          <a href="<%= confirmationUrl %>" class="button" title="<%= t('email.users.signup.button') %>">
+            <%= t('email.users.signup.button') %>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td class="copy-link">
+    <%= t('email.users.signup.paragraph.2') %>
+    <a href="<%= confirmationUrl %>"> <%= confirmationUrl %> </a>
+  </td>
+</tr>
+<tr>
+  <td class="annotations"><%= t('email.common.help.info') %></td>
+</tr>
+<tr>
+  <td class="greetings">
+    <%= t('email.common.greetings.yours') %><br />
+    <%= t('email.common.greetings.team') %>
+  </td>
+</tr>
+
+<%- include("../layout/footer") %>

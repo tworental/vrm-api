@@ -1,0 +1,14 @@
+{
+  "invoices.invoiceTitle": "Faktura",
+  "invoices.invoiceTitleProForma": "Faktura Pro-Forma",
+  "invoices.invoiceTitleCorrection": "Korekta faktury",
+  "invoices.bookingInvoiceTitle": "Faktura",
+  "invoices.invoiceNumber": "Faktura nr",
+  "invoices.invoiceDate": "Data wystawienia:",
+  "invoices.products": "Nazwa",
+  "invoices.quantity": "Ilość",
+  "invoices.price": "Cena",
+  "invoices.discount": "Zniżka",
+  "invoices.subtotal": "Wartość",
+  "invoices.total": "Razem"
+}

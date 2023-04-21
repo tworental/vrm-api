@@ -1,0 +1,30 @@
+<%- include("../layout/header") %>
+
+<tr>
+  <td>
+    <%= t('email.users.changeAccountOwner.hello') %>
+    <b> <%= firstName %> </b>,
+  </td>
+</tr>
+<tr>
+  <td>
+    <%= t('email.users.changeAccountOwner.paragraph.1a') %>
+    <b> <%= identifier %> </b>
+    <%= t('email.users.changeAccountOwner.paragraph.1b') %>
+    <b> <%= email %> </b>
+  </td>
+</tr>
+<tr>
+  <td><%= t('email.users.changeAccountOwner.paragraph.2' + (isAccountOwner ? 'a' : 'b' )) %></td>
+</tr>
+<tr>
+  <td class="annotations"><%= t('email.common.help.info') %></td>
+</tr>
+<tr>
+  <td class="greetings">
+    <%= t('email.common.greetings.yours') %><br />
+    <%= t('email.common.greetings.team') %>
+  </td>
+</tr>
+
+<%- include("../layout/footer") %>

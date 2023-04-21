@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+if [ -n "${WAIT_FOR_IT}" ]; then
+  wait-fot-it.sh db:3306
+fi
+
+echo "Running migrations"
+npm run knex -- migrate:latest
+npm run knex -- seed:run
+
+echo "Run required tasks"
+npm run task -- exchangerateapi
+
+echo "Starting $@"
+exec "$@"

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+CLUSTER=${1:-tworentals-staging}
+REGION=${2:-us-east-1}
+PROFILE=${3:-tworentals}
+
+echo "Checking AWS $PROFILE profile for $CLUSTER ECS cluster in $REGION region..."
+echo ""
+
+ARNS=$(aws ecs list-tasks --profile $PROFILE --cluster $CLUSTER --desired-status STOPPED --region $REGION --query taskArns | jq -r '.[]')
+
+for arn in $ARNS; do
+	aws ecs describe-tasks --profile $PROFILE --cluster $CLUSTER --region $REGION --query 'tasks[*].stoppedReason' --tasks $arn | jq
+done

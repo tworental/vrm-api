@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        NODE_ENV: ${NODE_ENV}
+        RELEASE_ID:
+    command: npm run dev
+    ports:
+      - 3000:3000
+      - 9230:9229
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ~/.aws/:/root/.aws:ro
+    env_file:
+      - .env
+    links:
+      - db
+    networks:
+      - backend
+
+  worker-queue-subscriber:
+    build: ./
+    command: npm run workers:debug:queueSubscriber
+    depends_on:
+      migration:
+        condition: service_started
+    env_file:
+      - .env
+    links:
+      - db
+    networks:
+      - backend
+
+  db:
+    image: mysql:8.0.21
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: "db0"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    command: mysqld --sql_mode="" --default-authentication-plugin=mysql_native_password --explicit_defaults_for_timestamp
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
+      timeout: 5s
+      retries: 10
+    volumes:
+      - ./.docker/mysql/my.conf:/etc/mysql/conf.d/config-file.cnf"
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend
+
+  migration:
+    build: ./
+    command: npm run knex -- migrate:latest
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    links:
+      - db
+    networks:
+      - backend
+
+volumes:
+  mysql-data:
+
+networks:
+  backend:
+    driver: "bridge"

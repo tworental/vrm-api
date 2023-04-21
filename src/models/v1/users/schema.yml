@@ -1,0 +1,138 @@
+components:
+  entity:
+    permissionsItem:
+      type: object
+      required:
+        - name
+        - abilities
+      properties:
+        name:
+          type: string
+          enum:
+            - account
+            - billings
+            - bookings
+            - integrations
+            - documentsInvoices
+            - documentsExpenses
+            - documentsQuotes
+            - settings
+            - owners
+            - guests
+            - companies
+            - channels
+            - properties
+            - storage
+            - statistics
+            - users
+            - reminders
+            - services
+            - workspaces
+            - websites
+          example: bookings
+        abilities:
+          type: array
+          maxItems: 3
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+              - read
+              - write
+              - delete
+
+  schemas:
+    UserCreateRequest:
+      type: object
+      required:
+        - email
+        - permissions
+      properties:
+        email:
+          type: string
+          format: email
+          example: "johndoe@domain.com"
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/entity/permissionsItems'
+       
+    UserUpdateRequest:
+      type: object
+      properties:
+        isAccountOwner:
+          type: integer
+          enum:
+            - 0
+            - 1
+          example: 1
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/entity/permissionsItems'
+            
+    UserCollectionResponse:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: "johndoe@domain.com"
+        phoneNumber:
+          type: string
+          example: "+41777777777"
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+        fullName:
+          type: string
+          example: "John Doe"
+        isAccountOwner:
+          type: boolean
+          example: 0
+        hasOnboardingEnabled:
+          type: boolean
+          example: 1
+        avatar:
+          type: string
+          example: 'https://example.com/image.jpg'
+        timezone:
+          type: string
+          example: 'CET: UTC+01:00'
+        locale:
+          type: string
+          example: 'en'
+        language:
+          type: string
+          example: 'en'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/entity/permissionsItems'
+        lastSignInAt:
+          type: string
+          format: date
+          example: "2021-02-15"
+        lockedAt:
+          type: string
+          format: date
+          example: "2021-02-20"
+        confirmedAt:
+          type: string
+          format: date
+          example: "2021-02-10"
+        createdAt:
+          type: string
+          format: date
+          example: "2021-01-01"
+        updatedAt:
+          type: string
+          format: date
+          example: "2021-02-15"
+        
+
+    UserItemResponse:
+      $ref: '#/components/schemas/UserCollectionResponse'
